@@ -1,0 +1,683 @@
+/* ======================== */
+/* === BASE STYLES === */
+/* ======================== */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --gray-color: #95a5a6;
+    --passenger-card: #3498db;
+    --environment-card: #2ecc71;
+    --eta-card: #9b59b6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ======================== */
+/* === LOGIN PAGE STYLES === */
+/* ======================== */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input.error {
+    border-color: var(--danger-color);
+    animation: shake 0.5s;
+}
+
+.error-message {
+    color: var(--danger-color);
+    margin: 10px 0;
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-container button:hover {
+    background: #2980b9;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* ======================== */
+/* === HOMEPAGE STYLES === */
+/* ======================== */
+.homepage-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.homepage-container h1 {
+    color: var(--dark-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.header-branding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.user-greeting {
+    margin-bottom: 40px;
+}
+
+.user-greeting .username {
+    color: var(--primary-color);
+}
+
+.vessel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.vessel-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    text-decoration: none;
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+.vessel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.vessel-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.vessel-card p {
+    color: var(--gray-color);
+    font-size: 1rem;
+}
+
+.vessel-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.vessel-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 10px;
+}
+
+.vessel-status.active {
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--secondary-color);
+}
+
+.vessel-status.inactive {
+    background: rgba(231, 76, 60, 0.2);
+    color: var(--danger-color);
+}
+
+.coming-soon {
+    opacity: 0.7;
+    border-left: 4px solid var(--gray-color);
+}
+
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.stat-card i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.stat-card h3 {
+    font-size: 1rem;
+    color: var(--gray-color);
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: var(--danger-color);
+    color: white !important;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+.logout-btn i {
+    margin-right: 8px;
+}
+
+/* ======================== */
+/* === DASHBOARD STYLES === */
+/* ======================== */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.card-header h2 {
+    font-size: 1.3rem;
+    color: var(--dark-color);
+}
+
+.card-body {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.card-footer {
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+/* Passenger Card */
+.passenger-card .card-header {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--passenger-card);
+}
+
+.passenger-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.passenger-display span:first-child {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--passenger-card);
+    display: block;
+    line-height: 1;
+}
+
+.passenger-label {
+    color: var(--gray-color);
+    font-size: 1rem;
+}
+
+.passenger-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.stat {
+    padding: 10px;
+}
+
+.stat span:first-child {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: block;
+    color: var(--dark-color);
+}
+
+.stat span:last-child {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+.capacity-meter {
+    display: flex;
+    align-items: center;
+}
+
+.meter-label {
+    width: 80px;
+    color: var(--gray-color);
+}
+
+.meter-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    background-color: var(--passenger-card);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.meter-value {
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+/* Environmental Card */
+.environmental-card .card-header {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--environment-card);
+}
+
+.sensor-row {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.sensor-row:last-child {
+    margin-bottom: 0;
+    justify-content: center;
+}
+
+.sensor {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 0 5px;
+}
+
+.sensor i {
+    font-size: 1.8rem;
+    color: var(--environment-card);
+    margin-bottom: 10px;
+}
+
+.sensor-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.sensor-label {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+.status-indicator {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+#environment-status {
+    color: var(--environment-card);
+    font-weight: bold;
+}
+
+#last-updated {
+    color: var(--gray-color);
+}
+
+/* ETA Card */
+.eta-card .card-header {
+    background-color: rgba(155, 89, 182, 0.1);
+    color: var(--eta-card);
+}
+
+.route-info {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.route-details {
+    flex: 2;
+}
+
+.route-stop {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.stop-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 15px;
+    position: relative;
+}
+
+.stop-circle::after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 20px;
+    width: 2px;
+    height: 30px;
+    background-color: var(--gray-color);
+}
+
+.stop-circle.current {
+    background-color: var(--eta-card);
+    border: 4px solid rgba(155, 89, 182, 0.3);
+}
+
+.stop-circle.next {
+    background-color: white;
+    border: 2px solid var(--gray-color);
+}
+
+.route-stop:last-child .stop-circle::after {
+    display: none;
+}
+
+.stop-name {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.stop-address {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+.eta-display {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.eta-value {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--eta-card);
+    line-height: 1;
+}
+
+.eta-label {
+    color: var(--gray-color);
+    font-size: 1rem;
+}
+
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--eta-card);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--gray-color);
+}
+
+.vehicle-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.vehicle-info span {
+    color: var(--dark-color);
+}
+
+.vehicle-info i {
+    color: var(--eta-card);
+    margin-right: 5px;
+}
+
+/* Data Section */
+.data-section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.data-section h2 {
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.data-section h2 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.chart-container {
+    height: 300px;
+    position: relative;
+}
+
+/* Combined Metrics Section */
+.combined-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.metric-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.metric-card h3 {
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.metric-card h3 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .route-info {
+        flex-direction: column;
+    }
+    
+    .eta-display {
+        margin-top: 20px;
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .eta-value {
+        margin-right: 10px;
+    }
+    
+    .homepage-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .vessel-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Utility Classes */
+.fa-tachometer-alt {
+    color: #9b59b6; 
+}
+
+/* ======================== */
+/* === NAVIGATION STYLES === */
+/* ======================== */
+.main-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.home-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.home-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* If using Font Awesome for icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');

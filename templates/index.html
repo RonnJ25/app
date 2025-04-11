@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Transport Monitoring System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
+    <link href="/static/styles.css" rel="stylesheet">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/sw.js');
+    }
+    </script>
+    <!-- Add this near your logout button or in your header -->
+    <nav class="main-nav">
+    <a href="/dashboard" class="nav-btn home-btn">
+        <i class="fas fa-home"></i> Home
+    </a>
+    <!-- Other nav items... -->
+    </nav>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Environmental and Ferry Passenger Monitoring System</h1>
+            <p>Real-time data from Raspberry Pi sensors</p>
+        </header>
+ 
+        <div class="dashboard">
+            <!-- Passenger Count Section -->
+            <div class="card passenger-card">
+                <div class="card-header">
+                    <i class="fas fa-users"></i>
+                    <h2>Passenger Count</h2>
+                </div>
+                <div class="card-body">
+                    <div class="passenger-display">
+                        <span id="current-passengers">0</span>
+                        <span class="passenger-label">Current Passengers</span>
+                    </div>
+                    <div class="passenger-stats">
+                        <div class="stat">
+                            <span id="passengers-in">0</span>
+                            <span>Entered</span>
+                        </div>
+                        <div class="stat">
+                            <span id="passengers-out">0</span>
+                            <span>Exited</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="capacity-meter">
+                        <div class="meter-label">Capacity</div>
+                        <div class="meter-bar">
+                            <div id="capacity-level" class="meter-fill" style="width: 0%"></div>
+                        </div>
+                        <div id="capacity-percent" class="meter-value">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environmental Data Section -->
+            <div class="card environmental-card">
+                <div class="card-header">
+                    <i class="fas fa-leaf"></i>
+                    <h2>Environmental Data</h2>
+                </div>
+                <div class="card-body">
+                    <div class="sensor-row">
+                        <div class="sensor">
+                            <i class="fas fa-temperature-high"></i>
+                            <div class="sensor-value" id="temperature">--°C</div>
+                            <div class="sensor-label">Temperature</div>
+                        </div>
+                        <div class="sensor">
+                            <i class="fas fa-tint"></i>
+                            <div class="sensor-value" id="humidity">--%</div>
+                            <div class="sensor-label">Humidity</div>
+                        </div>
+                    </div>
+                    <div class="sensor-row">
+                        <div class="sensor">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <div class="sensor-value" id="pressure">-- hPa</div>
+                            <div class="sensor-label">Pressure</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="status-indicator">
+                        <span id="environment-status">Data refreshing...</span>
+                        <span id="last-updated">Last updated: --:--:--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETA and Route Section -->
+            <div class="card eta-card">
+                <div class="card-header">
+                    <i class="fas fa-route"></i>
+                    <h2>Route & ETA</h2>
+                </div>
+                <div class="card-body">
+                    <div class="route-info">
+                        <div class="route-details">
+                            <div class="route-stop">
+                                <div class="stop-circle current"></div>
+                                <div class="stop-info">
+                                    <div class="stop-name">Current Location</div>
+                                    <div class="stop-address" id="current-location">Acquiring GPS...</div>
+                                </div>
+                            </div>
+                            <div class="route-stop">
+                                <div class="stop-circle next"></div>
+                                <div class="stop-info">
+                                    <div class="stop-name">Next Stop</div>
+                                    <div class="stop-address" id="next-stop">Central Station</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="eta-display">
+                            <div class="eta-value" id="eta-minutes">--</div>
+                            <div class="eta-label">minutes</div>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="route-progress" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>Start</span>
+                            <span id="progress-percent">0%</span>
+                            <span>Destination</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="vehicle-info">
+                        <span><i class="fas fa-ship"></i> Vessel ID: <span id="vessel-id">RP-2023</span></span>
+                        <span><i class="fas fa-clock"></i> Departure: <span id="departure-time">08:00 AM</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Replace the entire data-section div with this: -->
+    <div class="data-section">
+        <h2><i class="fas fa-chart-line"></i> Historical Data</h2>
+        <div class="chart-container">
+            <canvas id="passengerChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="environmentChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="routeChart"></canvas>
+        </div>
+    </div>
+
+        <footer>
+            <p>Thesis Project: Public Transport Monitoring System</p>
+            <p>Data collected from Raspberry Pi sensors | © 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

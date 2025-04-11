@@ -1,0 +1,14 @@
+{
+    "name": "Passenger Monitor",
+    "short_name": "PassMonitor",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "icons": [
+      {
+        "src": "icon-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ]
+  }

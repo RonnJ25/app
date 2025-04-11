@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fleet Monitoring Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="homepage-container">
+
+        <!-- User Greeting -->
+        <div class="user-greeting">
+            <h1>Welcome back, <span class="username">{{ session.username }}</span>!</h1>
+            <p>Select a vessel to view real-time analytics</p>
+        </div>
+
+        <!-- Vessel Grid -->
+        <div class="vessel-grid">
+            <a href="/dashboard?vessel_id=1" class="vessel-card">
+                <div class="vessel-icon">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <h2>Ferry Alpha</h2>
+                <p>Iloilo ↔ Buenavista</p>
+                <div class="vessel-status active">Online</div>
+            </a>
+            <a href="/dashboard?vessel_id=2" class="vessel-card">
+                <div class="vessel-icon">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <h2>Ferry Beta</h2>
+                <p>Iloilo ↔ Jordan</p>
+                <div class="vessel-status active">Online</div>
+            </a>
+            <a href="#" class="vessel-card coming-soon">
+                <div class="vessel-icon">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <h2>New Vessel</h2>
+                <p>Coming Soon</p>
+                <div class="vessel-status inactive">Offline</div>
+            </a>
+        </div>
+
+        <a href="/logout" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+
+        <footer>
+            <p><br><br><br><br><br></p>
+            <p>Thesis Project: Public Transport Monitoring System</p>
+            <p>Data collected from Raspberry Pi sensors | © 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
