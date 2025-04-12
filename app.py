@@ -1,50 +1,28 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import random
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key_here')  # Use environment variable in production
+app.secret_key = 'your_secret_key_here'  # Replace with a real secret key in production
 
-# Hashed user database (for demo only - use a real database in production)
-users = {
-    "admin": generate_password_hash("password123")  # Hashed password
-}
-
-# Serve static files
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    return send_from_directory(os.path.join(os.getcwd(), 'static'), filename
+# Simulate a logged-in user by default
+DEFAULT_USER = "admin"
 
 @app.route('/')
 def home():
-    if 'username' in session:
-        return redirect(url_for('homepage'))
-    return redirect(url_for('login'))
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if username in users and check_password_hash(users[username], password):
-            session['username'] = username
-            return redirect(url_for('homepage'))
-        error = 'Invalid username or password'
-    return render_template('login.html', error=error)
+    # Automatically set the user as logged in
+    session['username'] = DEFAULT_USER
+    return redirect(url_for('homepage'))
 
 @app.route('/homepage')
 def homepage():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    return render_template('homepage.html', username=session['username'])
+    # No need to check for session since we're automatically logged in
+    return render_template('homepage.html', username=DEFAULT_USER)
 
 @app.route('/dashboard')
 def dashboard():
-    if 'username' not in session:
-        return redirect(url_for('login'))
+    # No login check needed
     
     vessel_id = request.args.get('vessel_id', '1')  # Default to vessel 1
     vessel_name = get_vessel_name(vessel_id)  # Helper function
@@ -53,19 +31,18 @@ def dashboard():
         'index.html',
         vessel_id=vessel_id,
         vessel_name=vessel_name,
-        username=session['username']
+        username=DEFAULT_USER
     )
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('login'))
+    # After logout, redirect back to homepage which will auto-login again
+    return redirect(url_for('homepage'))
 
 @app.route('/api/data')
 def get_sensor_data():
-    if 'username' not in session:
-        return jsonify({"error": "Unauthorized"}), 401
-        
+    # No authorization check needed
     vessel_id = request.args.get('vessel_id', '1')
     
     # Simulate different data for different vessels
@@ -100,8 +77,5 @@ def get_vessel_name(vessel_id):
     }
     return vessels.get(vessel_id, 'Unknown Vessel')
 
-# This is required for Vercel to recognize the app
-def vercel_handler(request):
-    from flask import Request, Response
-    with app.request_context(request.environ):
-        return app.full_dispatch_request()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
