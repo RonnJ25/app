@@ -1,15 +1,21 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
 import random
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Replace with a real secret key in production
+app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key_here')  # Use environment variable in production
 
 # Hashed user database (for demo only - use a real database in production)
 users = {
     "admin": generate_password_hash("password123")  # Hashed password
 }
+
+# Serve static files
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(os.path.join(os.getcwd(), 'static'), filename
 
 @app.route('/')
 def home():
@@ -94,5 +100,8 @@ def get_vessel_name(vessel_id):
     }
     return vessels.get(vessel_id, 'Unknown Vessel')
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+# This is required for Vercel to recognize the app
+def vercel_handler(request):
+    from flask import Request, Response
+    with app.request_context(request.environ):
+        return app.full_dispatch_request()
