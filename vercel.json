@@ -1,12 +1,19 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "templates/index.html",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      { "src": "/", "dest": "templates/index.html" }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
+}
