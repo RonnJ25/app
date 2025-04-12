@@ -1,5 +1,2 @@
-Adafruit_DHT==1.4.0
-gpiozero==1.6.2
-RPi.GPIO==0.7.1
 Flask==2.3.2
-Werkzeug==2.3.6
+Werkzeug==2.3.7
